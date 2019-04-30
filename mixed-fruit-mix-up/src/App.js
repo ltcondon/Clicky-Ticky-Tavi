@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "./components/Nav";
+// import Nav from "./components/Nav";
 import { Container, Row, Col } from "./components/Grid";
 import FruitCard from "./components/FruitCard";
 import Wrapper from "./components/Wrapper";
@@ -55,18 +55,21 @@ class App extends Component {
     const name = event.target.name;
     console.log(name);
 
-    if ( (this.state.fruitClicked === true) && (this.state.clickedName !== name) ) {
+    if ( (this.state.fruitClicked === true) && (!this.state.clickedName.includes(name)) ) {
       
       const newScore = this.state.score + 1;
-      
+      const nameArr = [...this.state.clickedName];
+
+      nameArr.push(name);
+
       this.setState({
-        clickedName: name,
+        clickedName: nameArr,
         score: newScore,
         fruitClicked: false,
         fruits: shuffle(fruits)
       })
 
-    } else if ( (this.state.fruitClicked === true) && (this.state.clickedName === name) ) {
+    } else if ( (this.state.fruitClicked === true) && (this.state.clickedName.includes(name)) ) {
       
       alert("You added that fruit already!")
       
@@ -81,7 +84,7 @@ class App extends Component {
     } else {
 
       this.setState({
-        clickedName: name,
+        clickedName: [name],
         fruitClicked: true,
         fruits: shuffle(fruits)
 
@@ -94,14 +97,24 @@ class App extends Component {
     return (
     <Wrapper>
       <Title>Fruit Salad Mix-Up</Title>
-        {this.state.fruits.map(fruit =>
-          <FruitCard
+        
+        <Container>
+          <Row>
+            {this.state.fruits.map(fruit => (
+              <Col size="md-3 sm-3">
+               <FruitCard
             name={fruit.name}
             key={fruit.id}
             onClick={this.handleFruitClick}
             image={fruit.image}
           />
-          )}
+              </Col>
+            ))}
+          </Row>
+        </Container>
+
+        <br></br><br></br>
+        
     </Wrapper>
     )
   }
