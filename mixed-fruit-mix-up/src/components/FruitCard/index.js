@@ -3,14 +3,11 @@ import "./style.css";
 
 function FriendCard(props) {
   return (
-    <div className="card">
+    
       <div className="img-container">
-        <img alt={props.name} src={props.image} />
+        <img alt={props.name} src={props.image} onClick={props.onClick} name={props.name}/>
       </div>
-      <div className="content">
-       
-      </div>
-    </div>
+
   );
 }
 
