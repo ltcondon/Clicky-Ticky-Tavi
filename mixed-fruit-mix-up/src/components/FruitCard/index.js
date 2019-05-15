@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function FriendCard(props) {
+function FruitCard(props) {
   return (
     
       <div className="img-container">
@@ -11,4 +11,4 @@ function FriendCard(props) {
   );
 }
 
-export default FriendCard;
+export default FruitCard;

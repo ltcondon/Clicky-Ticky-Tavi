@@ -1,12 +1,15 @@
-/* .img-container {
-  height: 60%;
+.img-container {
   overflow: hidden;
   text-align: center;
   background:#6CADDC;
-} */
+  margin-bottom: 20px;
+}
 
 img {
-  height: 180px;
-  width: 180px;
-  padding:20px;
+  width: 90%;
+  display: block;
+  margin: auto;
+  padding: 20px;
+
 }
+

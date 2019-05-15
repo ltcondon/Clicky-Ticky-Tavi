@@ -35,16 +35,7 @@ class App extends Component {
   
   componentDidMount = () => {
 
-    if (this.state.score >= 12) {
-      alert("Nice Job! You've crafted the perfect salad!");
-
-      this.setState({
-        score: 0,
-        clickedName: "",
-        fruitClicked: false,
-        fruits: shuffle(fruits)
-      })
-    }
+    
   }
 
 
@@ -62,10 +53,20 @@ class App extends Component {
 
       nameArr.push(name);
 
+      if (newScore >= 12) {
+        alert("Nice Job! You've crafted the perfect salad!");
+  
+        this.setState({
+          score: 0,
+          clickedName: "",
+          fruitClicked: false,
+          fruits: shuffle(fruits)
+        })
+      }
+
       this.setState({
         clickedName: nameArr,
         score: newScore,
-        fruitClicked: false,
         fruits: shuffle(fruits)
       })
 
@@ -96,7 +97,7 @@ class App extends Component {
   render () {
     return (
     <Wrapper>
-      <Title>Fruit Salad Mix-Up</Title>
+      <Title>Fruit Salad Mix-Up | Score: {this.state.score}</Title>
         
         <Container>
           <Row>
