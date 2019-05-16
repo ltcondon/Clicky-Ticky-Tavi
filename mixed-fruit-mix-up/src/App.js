@@ -97,7 +97,12 @@ class App extends Component {
   render () {
     return (
     <Wrapper>
-      <Title>Fruit Salad Mix-Up | Score: {this.state.score}</Title>
+      <Row>
+        <Col size="md-4">
+          Score: {this.state.score}
+        </Col>
+      </Row>
+      <Title>Fruit Salad Mix-Up | </Title>
         
         <Container>
           <Row>

@@ -6,3 +6,20 @@
   color: #2A77AE;
   margin-bottom: 50px;
 }
+
+.logo-wrapper {
+  width: 80%;
+  margin-top: -100px;
+  margin-bottom: 20px;
+  height:300px;
+}
+
+.logo {
+  max-height: 400px;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  -webkit-transform: rotateZ(-26deg);
+  -ms-transform: rotateZ(-26deg);
+  transform: rotateZ(-26deg);
+}

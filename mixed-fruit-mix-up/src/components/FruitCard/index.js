@@ -5,7 +5,7 @@ function FruitCard(props) {
   return (
     
       <div className="img-container">
-        <img alt={props.name} src={props.image} onClick={props.onClick} name={props.name}/>
+        <img className="fruit" alt={props.name} src={props.image} onClick={props.onClick} name={props.name}/>
       </div>
 
   );
