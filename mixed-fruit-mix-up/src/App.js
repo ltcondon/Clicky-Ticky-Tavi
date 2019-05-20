@@ -5,6 +5,7 @@ import FruitCard from "./components/FruitCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import fruits from "./fruits.json";
+import Scoreboard from "./components/Scoreboard";
 
 
 const shuffle = (array) => {
@@ -40,66 +41,53 @@ class App extends Component {
 
 
   handleFruitClick = event => {
-    console.log("fruit clicked")
-    console.log(this.state.fruitClicked);
-    console.log(this.state.clickedName);
     const name = event.target.name;
-    console.log(name);
 
-    if ( (this.state.fruitClicked === true) && (!this.state.clickedName.includes(name)) ) {
-      
-      const newScore = this.state.score + 1;
-      const nameArr = [...this.state.clickedName];
+    switch(this.state.clickedName.includes(name)) {
 
-      nameArr.push(name);
-
-      if (newScore >= 12) {
-        alert("Nice Job! You've crafted the perfect salad!");
-  
+      case(true):
+        alert("You added that fruit already!")
+        
         this.setState({
           score: 0,
           clickedName: "",
           fruitClicked: false,
           fruits: shuffle(fruits)
         })
+      break;
+
+      default:
+        const newScore = this.state.score + 1;
+        const nameArr = [name, ...this.state.clickedName];
+
+        if (newScore > 10) {
+          alert("Nice Job! You've crafted the perfect salad!");
+    
+          this.setState({
+            score: 0,
+            clickedName: "",
+            fruitClicked: false,
+            fruits: shuffle(fruits)
+          })
+        }
+
+        this.setState({
+          clickedName: nameArr,
+          score: newScore,
+          fruits: shuffle(fruits)
+        })
       }
 
-      this.setState({
-        clickedName: nameArr,
-        score: newScore,
-        fruits: shuffle(fruits)
-      })
+    console.log(`Score: ${this.state.score}  Fruits: ${this.state.clickedName || name}`);
 
-    } else if ( (this.state.fruitClicked === true) && (this.state.clickedName.includes(name)) ) {
-      
-      alert("You added that fruit already!")
-      
-      this.setState({
-        score: 0,
-        clickedName: "",
-        fruitClicked: false,
-        fruits: shuffle(fruits)
-
-      })
-
-    } else {
-
-      this.setState({
-        clickedName: [name],
-        fruitClicked: true,
-        fruits: shuffle(fruits)
-
-      })
     }
-
-  }
 
   render () {
     return (
     <Wrapper>
       <Row>
         <Col size="md-4">
-          Score: {this.state.score}
+          <Scoreboard score={this.state.score} />
         </Col>
       </Row>
       <Title>Fruit Salad Mix-Up | </Title>
