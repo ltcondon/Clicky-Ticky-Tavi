@@ -26,25 +26,10 @@ class App extends Component {
     fruits
   }
 
-  // componentDidMount() {
-  //   const shuffledFruits = shuffle(fruits);
-  //   this.setState({
-  //     fruits: shuffledFruits
-  //   })
-  // }
-
-  
-  componentDidMount = () => {
-
-    
-  }
-
-
   handleFruitClick = event => {
     const name = event.target.name;
 
     switch(this.state.clickedName.includes(name)) {
-
       case(true):
         alert("You added that fruit already!")
         
