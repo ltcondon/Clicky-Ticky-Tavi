@@ -21,6 +21,8 @@ class App extends Component {
 
   state = {
     score: 0,
+    highScore: 0,
+    bestTime: 30,
     time: 30,
     clickedName: "",
     fruitClicked:'',
@@ -70,11 +72,14 @@ class App extends Component {
         const newScore = this.state.score + 1;
         const nameArr = [name, ...this.state.clickedName];
 
-        if (newScore > 10) {
+        if (newScore > 11) {
           alert("Nice Job! You've crafted the perfect salad!");
-    
+          const bestTime = (30 - this.state.time)
+          
           this.setState({
+            highScore: newScore,
             score: 0,
+            bestTime: bestTime,
             clickedName: "",
             fruitClicked: false,
             fruits: shuffle(fruits)
@@ -90,11 +95,20 @@ class App extends Component {
           })
         }
 
-        this.setState({
-          clickedName: nameArr,
-          score: newScore,
-          fruits: shuffle(fruits)
-        })
+        if (newScore > this.state.highScore) {
+          this.setState({
+            highScore: newScore,
+          })
+        }
+
+        if (newScore < 12) {
+          this.setState({
+            clickedName: nameArr,
+            score: newScore,
+            fruits: shuffle(fruits)
+          })
+        }
+
       }
 
     console.log(`Score: ${this.state.score}  Fruits: ${this.state.clickedName || name}`);
@@ -105,11 +119,18 @@ class App extends Component {
     return (
     <Wrapper>
       <Row>
-        <Col size="md-4">
-          <Scoreboard score={this.state.score} time={this.state.time} />
+        <Col size="md-3">
+          <Scoreboard score={this.state.score} time={this.state.time} highScore={this.state.highScore} />
+        </Col>
+        <Col size="md-6">
+          <Title/>
+        </Col>
+        <Col size="md-3">
+          <h2 className='highScore'>High Score: <span>{this.state.highScore}</span></h2>
+          <h2 className='bestTime'>Best Time: <span>{`${this.state.bestTime} seconds`}</span></h2>
+
         </Col>
       </Row>
-      <Title>Fruit Salad Mix-Up | </Title>
         
         <Container>
           <Row>
