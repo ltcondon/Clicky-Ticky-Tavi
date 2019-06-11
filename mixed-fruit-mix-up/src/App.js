@@ -21,9 +21,34 @@ class App extends Component {
 
   state = {
     score: 0,
+    time: 30,
     clickedName: "",
-    fruitClicked: false,
+    fruitClicked:'',
     fruits
+  }
+
+  timer() {
+    this.setState({
+      time: this.state.time - 1
+    })
+
+    if(this.state.fruitClicked === false) { 
+      clearInterval(this.intervalId);
+      this.setState({
+        time: 30
+      })
+    }
+
+    if (this.state.time < 1) {
+      alert("Times up!")
+        
+        this.setState({
+          score: 0,
+          clickedName: "",
+          fruitClicked: false,
+          fruits: shuffle(fruits)
+        })
+    }
   }
 
   handleFruitClick = event => {
@@ -54,6 +79,15 @@ class App extends Component {
             fruitClicked: false,
             fruits: shuffle(fruits)
           })
+          
+        }
+
+        if (!this.state.fruitClicked) {
+          this.intervalId = setInterval(this.timer.bind(this), 1000);
+
+          this.setState({
+            fruitClicked: true,
+          })
         }
 
         this.setState({
@@ -72,7 +106,7 @@ class App extends Component {
     <Wrapper>
       <Row>
         <Col size="md-4">
-          <Scoreboard score={this.state.score} />
+          <Scoreboard score={this.state.score} time={this.state.time} />
         </Col>
       </Row>
       <Title>Fruit Salad Mix-Up | </Title>
