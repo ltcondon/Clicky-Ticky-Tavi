@@ -6,6 +6,7 @@ import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import fruits from "./fruits.json";
 import Scoreboard from "./components/Scoreboard";
+import Fade from 'react-reveal/Fade'
 
 
 const shuffle = (array) => {
@@ -119,16 +120,21 @@ class App extends Component {
     return (
     <Wrapper>
       <Row>
-        <Col size="md-3">
+        <Col size="md-3" order='2'>
+          <Fade left>
           <Scoreboard score={this.state.score} time={this.state.time} highScore={this.state.highScore} />
+          </Fade>
         </Col>
-        <Col size="md-6">
+        <Col size="md-6" order='1'>
+          <Fade top>
           <Title/>
+          </Fade>
         </Col>
-        <Col size="md-3">
+        <Col size="md-3" order='3'>
+        <Fade right>
           <h2 className='highScore'>High Score: <span>{this.state.highScore}</span></h2>
           <h2 className='bestTime'>Best Time: <span>{`${this.state.bestTime} seconds`}</span></h2>
-
+          </Fade>
         </Col>
       </Row>
         
